@@ -150,3 +150,28 @@ Players can use Claude Code's Task tool to spawn sub-agents for:
 
 - Each Player has dedicated task files
 - No two Players write to the same file
+
+## Documentation
+
+Comprehensive guides for AI-driven development:
+
+- **[AI Workflow](docs/AI_WORKFLOW.md)** - Complete AI-driven development workflow
+  - TDD process (RED-GREEN-REFACTOR)
+  - Small PR principle (<200 lines)
+  - Quality verification steps
+  - Communication protocols
+  - Best practices and anti-patterns
+
+- **[Prompting Guide](docs/PROMPTING_GUIDE.md)** - Effective prompt design
+  - How to provide rich context
+  - Success criteria specification
+  - Example-driven prompting
+  - Common pitfalls and fixes
+  - Role-specific prompt templates
+
+- **[Quality Gates](docs/QUALITY_GATES.md)** - Code quality standards
+  - Mandatory quality checks (coverage, lint, types)
+  - Code quality standards (immutability, error handling)
+  - Test quality requirements (AAA pattern, no flaky tests)
+  - Monitoring and metrics
+  - Threshold definitions (Green/Yellow/Red)
