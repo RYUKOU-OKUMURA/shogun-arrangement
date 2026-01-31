@@ -70,8 +70,15 @@ tmux send-keys -t captain:0.0 Enter
 tmux-parallel-core/
 ├── start.sh                           # Main startup script
 ├── init.sh                            # Initial setup
+├── SETUP.md                           # Setup guide
 ├── dashboard.md                       # Progress dashboard
 ├── project/                           # Shared project files
+│
+├── docs/                              # Comprehensive documentation
+│   ├── AI_WORKFLOW.md                 # TDD workflow guide
+│   ├── PROMPTING_GUIDE.md             # Prompt design guide
+│   ├── QUALITY_GATES.md               # Quality standards
+│   └── IMPLEMENTATION_ROADMAP.md      # Development plan
 │
 ├── director/
 │   └── agents.md                      # Director instructions
@@ -184,3 +191,11 @@ Comprehensive guides for AI-driven development:
   - Test quality requirements (AAA pattern, no flaky tests)
   - Monitoring and metrics
   - Threshold definitions (Green/Yellow/Red)
+
+- **[Implementation Roadmap](docs/IMPLEMENTATION_ROADMAP.md)** - Future development plan
+  - Phase-by-phase implementation strategy
+  - Core functionality automation
+  - Testing infrastructure
+  - CI/CD integration
+  - Advanced features (learning, self-healing)
+  - Success metrics and timelines
