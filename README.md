@@ -1,95 +1,95 @@
 # tmux-parallel-core
 
-Soccer Team style multi-agent orchestration for Claude Code.
+Claude Codeのためのサッカーチームスタイルのマルチエージェントオーケストレーションシステム。
 
-## Architecture
+## アーキテクチャ
 
 ```
-User (Boss)
+ユーザー（ボス）
     │
-    ▼ instructions
+    ▼ 指示
 ┌──────────────┐
-│   Director   │  ← Strategic planner (task decomposition, role assignment)
+│   ディレクター  │  ← 戦略的計画者（タスク分解、役割割り当て）
 └──────┬───────┘
        │ YAML + send-keys
        ▼
 ┌──────────────┐
-│   Captain    │  ← Coordinator (relay instructions, monitor progress)
+│   キャプテン   │  ← 調整者（指示の中継、進捗監視）
 └──────┬───────┘
        │ YAML + send-keys
        ▼
 ┌───────┬───────┬───────┐
-│Player1│Player2│Player3│  ← Executors (actual work)
+│プレイヤー1│プレイヤー2│プレイヤー3│  ← 実行者（実際の作業）
 └───┬───┴───┬───┴───┬───┘
     │       │       │
     ▼       ▼       ▼
-  Task    Task    Task     ← Sub-agents (via Task tool, as needed)
-  Tool    Tool    Tool
+  タスク    タスク    タスク     ← サブエージェント（必要に応じてTaskツール経由）
+  ツール    ツール    ツール
 ```
 
-## Quick Start
+## クイックスタート
 
 ```bash
-# Initial setup
+# 初期セットアップ
 chmod +x init.sh start.sh
 ./init.sh
 
-# Start all agents
+# 全エージェントの起動
 ./start.sh
 
-# Attach to sessions
-tmux attach-session -t director   # Strategic planning
-tmux attach-session -t captain    # Coordination
-tmux attach-session -t players    # Execution
+# セッションへのアタッチ
+tmux attach-session -t director   # 戦略的計画
+tmux attach-session -t captain    # 調整
+tmux attach-session -t players    # 実行
 ```
 
-**📖 For detailed setup instructions, see [SETUP.md](SETUP.md)**
+**📖 詳細なセットアップ手順については、[SETUP.md](SETUP.md)を参照してください**
 
-## Communication Flow
+## 通信フロー
 
-1. **User → Director**: Direct input in director session
-2. **Director → Captain**: Write to `queue/director_to_captain.yaml`, then send-keys
-3. **Captain → Player**: Write to `queue/captain_to_players/player{N}.yaml`, then send-keys
-4. **Player → Captain**: Notify via send-keys after task completion
-5. **Captain → Director**: Update `dashboard.md`
+1. **ユーザー → ディレクター**: ディレクターセッションでの直接入力
+2. **ディレクター → キャプテン**: `queue/director_to_captain.yaml`に書き込み、その後send-keys
+3. **キャプテン → プレイヤー**: `queue/captain_to_players/player{N}.yaml`に書き込み、その後send-keys
+4. **プレイヤー → キャプテン**: タスク完了後にsend-keysで通知
+5. **キャプテン → ディレクター**: `dashboard.md`を更新
 
-### Critical: send-keys must be 2 separate calls!
+### 重要：send-keysは2つの別々の呼び出しである必要があります！
 
 ```bash
-# WRONG: Combined (Enter not parsed correctly)
+# 間違い：結合（Enterが正しく解析されない）
 tmux send-keys -t captain:0.0 'message' Enter
 
-# CORRECT: Separate calls
+# 正しい：別々の呼び出し
 tmux send-keys -t captain:0.0 'message'
 tmux send-keys -t captain:0.0 Enter
 ```
 
-## Directory Structure
+## ディレクトリ構造
 
 ```
 tmux-parallel-core/
-├── start.sh                           # Main startup script
-├── init.sh                            # Initial setup
-├── SETUP.md                           # Setup guide
-├── dashboard.md                       # Progress dashboard
-├── project/                           # Shared project files
+├── start.sh                           # メイン起動スクリプト
+├── init.sh                            # 初期セットアップ
+├── SETUP.md                           # セットアップガイド
+├── dashboard.md                       # 進捗ダッシュボード
+├── project/                           # 共有プロジェクトファイル
 │
-├── docs/                              # Comprehensive documentation
-│   ├── AI_WORKFLOW.md                 # TDD workflow guide
-│   ├── PROMPTING_GUIDE.md             # Prompt design guide
-│   ├── QUALITY_GATES.md               # Quality standards
-│   └── IMPLEMENTATION_ROADMAP.md      # Development plan
+├── docs/                              # 包括的なドキュメント
+│   ├── AI_WORKFLOW.md                 # TDDワークフローガイド
+│   ├── PROMPTING_GUIDE.md             # プロンプトデザインガイド
+│   ├── QUALITY_GATES.md               # 品質基準
+│   └── IMPLEMENTATION_ROADMAP.md      # 開発計画
 │
 ├── director/
-│   └── agents.md                      # Director instructions
+│   └── agents.md                      # ディレクターの指示
 │
 ├── captain/
-│   └── agents.md                      # Captain instructions
+│   └── agents.md                      # キャプテンの指示
 │
 ├── player1/
-│   ├── agents.md                      # Player 1 instructions
-│   ├── project -> ../project          # Symlink to shared project
-│   └── specs/                         # Design documents
+│   ├── agents.md                      # プレイヤー1の指示
+│   ├── project -> ../project          # 共有プロジェクトへのシンボリックリンク
+│   └── specs/                         # 設計ドキュメント
 │
 ├── player2/
 │   └── ...
@@ -98,104 +98,104 @@ tmux-parallel-core/
 │   └── ...
 │
 └── queue/
-    ├── director_to_captain.yaml       # Director → Captain commands
+    ├── director_to_captain.yaml       # ディレクター → キャプテンへのコマンド
     └── captain_to_players/
-        ├── player1.yaml               # Captain → Player 1 tasks
-        ├── player2.yaml               # Captain → Player 2 tasks
-        └── player3.yaml               # Captain → Player 3 tasks
+        ├── player1.yaml               # キャプテン → プレイヤー1へのタスク
+        ├── player2.yaml               # キャプテン → プレイヤー2へのタスク
+        └── player3.yaml               # キャプテン → プレイヤー3へのタスク
 ```
 
-## Customization
+## カスタマイズ
 
-### Change player count
+### プレイヤー数の変更
 
 ```bash
-./start.sh -n 5   # Use 5 players instead of 3
+./start.sh -n 5   # 3の代わりに5人のプレイヤーを使用
 ```
 
-### Setup only (no Claude Code)
+### セットアップのみ（Claude Codeなし）
 
 ```bash
-./start.sh -s     # Create sessions, start Claude manually
+./start.sh -s     # セッションを作成、Claudeを手動で起動
 ```
 
-### Modify instructions
+### 指示の変更
 
-Edit `agents.md` files in each role directory to customize agent behavior.
+各役割のディレクトリ内の`agents.md`ファイルを編集して、エージェントの動作をカスタマイズします。
 
-## Session Reference
+## セッション参照
 
-| Role | Session | Pane |
-|------|---------|------|
-| Director | director | 0 |
-| Captain | captain | 0 |
-| Player 1 | players | 0 |
-| Player 2 | players | 1 |
-| Player 3 | players | 2 |
+| 役割 | セッション | ペイン |
+|------|-----------|-------|
+| ディレクター | director | 0 |
+| キャプテン | captain | 0 |
+| プレイヤー1 | players | 0 |
+| プレイヤー2 | players | 1 |
+| プレイヤー3 | players | 2 |
 
-## Key Concepts
+## 重要な概念
 
-### Event-Driven (No Polling)
+### イベント駆動（ポーリングなし）
 
-- Never use loops to wait for responses
-- Always use YAML files + send-keys notifications
-- This saves API credits
+- 応答を待つためにループを使用しない
+- 常にYAMLファイル + send-keys通知を使用する
+- これによりAPIクレジットを節約
 
-### Hierarchy
+### 階層構造
 
-- **Director**: Receives user commands, decomposes tasks, assigns roles
-- **Captain**: Relays instructions to players, monitors progress
-- **Players**: Execute tasks, can spawn sub-agents via Task tool
+- **ディレクター**: ユーザーのコマンドを受け取り、タスクを分解し、役割を割り当てる
+- **キャプテン**: プレイヤーに指示を中継し、進捗を監視する
+- **プレイヤー**: タスクを実行し、Taskツール経由でサブエージェントを生成できる
 
-### Sub-agents (Task Tool)
+### サブエージェント（Taskツール）
 
-Players can use Claude Code's Task tool to spawn sub-agents for:
-- Complex subtasks
-- Parallel independent work
-- Code review
-- Test execution
+プレイヤーはClaude CodeのTaskツールを使用して、以下のためにサブエージェントを生成できます：
+- 複雑なサブタスク
+- 並列独立作業
+- コードレビュー
+- テスト実行
 
-### Race Condition Prevention
+### 競合状態の防止
 
-- Each Player has dedicated task files
-- No two Players write to the same file
+- 各プレイヤーは専用のタスクファイルを持つ
+- 2つのプレイヤーが同じファイルに書き込むことはない
 
-## Documentation
+## ドキュメント
 
-Comprehensive guides for AI-driven development:
+AI駆動開発のための包括的なガイド：
 
-- **[Setup Guide](SETUP.md)** - Complete installation and setup instructions
-  - Prerequisites and installation
-  - Starting and stopping the system
-  - Configuration and customization
-  - Troubleshooting
-  - First task example
+- **[セットアップガイド](SETUP.md)** - 完全なインストールとセットアップ手順
+  - 前提条件とインストール
+  - システムの起動と停止
+  - 設定とカスタマイズ
+  - トラブルシューティング
+  - 最初のタスクの例
 
-- **[AI Workflow](docs/AI_WORKFLOW.md)** - Complete AI-driven development workflow
-  - TDD process (RED-GREEN-REFACTOR)
-  - Small PR principle (<200 lines)
-  - Quality verification steps
-  - Communication protocols
-  - Best practices and anti-patterns
+- **[AIワークフロー](docs/AI_WORKFLOW.md)** - 完全なAI駆動開発ワークフロー
+  - TDDプロセス（RED-GREEN-REFACTOR）
+  - 小規模PRの原則（<200行）
+  - 品質検証手順
+  - 通信プロトコル
+  - ベストプラクティスとアンチパターン
 
-- **[Prompting Guide](docs/PROMPTING_GUIDE.md)** - Effective prompt design
-  - How to provide rich context
-  - Success criteria specification
-  - Example-driven prompting
-  - Common pitfalls and fixes
-  - Role-specific prompt templates
+- **[プロンプティングガイド](docs/PROMPTING_GUIDE.md)** - 効果的なプロンプトデザイン
+  - 豊富なコンテキストの提供方法
+  - 成功基準の指定
+  - 例駆動のプロンプティング
+  - 一般的な落とし穴と修正
+  - 役割別プロンプトテンプレート
 
-- **[Quality Gates](docs/QUALITY_GATES.md)** - Code quality standards
-  - Mandatory quality checks (coverage, lint, types)
-  - Code quality standards (immutability, error handling)
-  - Test quality requirements (AAA pattern, no flaky tests)
-  - Monitoring and metrics
-  - Threshold definitions (Green/Yellow/Red)
+- **[品質ゲート](docs/QUALITY_GATES.md)** - コード品質基準
+  - 必須の品質チェック（カバレッジ、リント、型）
+  - コード品質基準（不変性、エラー処理）
+  - テスト品質要件（AAAパターン、不安定なテストなし）
+  - モニタリングとメトリクス
+  - しきい値定義（Green/Yellow/Red）
 
-- **[Implementation Roadmap](docs/IMPLEMENTATION_ROADMAP.md)** - Future development plan
-  - Phase-by-phase implementation strategy
-  - Core functionality automation
-  - Testing infrastructure
-  - CI/CD integration
-  - Advanced features (learning, self-healing)
-  - Success metrics and timelines
+- **[実装ロードマップ](docs/IMPLEMENTATION_ROADMAP.md)** - 今後の開発計画
+  - フェーズごとの実装戦略
+  - コア機能の自動化
+  - テストインフラストラクチャ
+  - CI/CD統合
+  - 高度な機能（学習、自己修復）
+  - 成功指標とタイムライン

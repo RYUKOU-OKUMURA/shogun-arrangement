@@ -1,14 +1,14 @@
-# Setup Guide
+# セットアップガイド
 
-Complete setup instructions for tmux-parallel-core multi-agent system.
+tmux-parallel-coreマルチエージェントシステムの完全なセットアップ手順。
 
-## Prerequisites
+## 前提条件
 
-Before installing tmux-parallel-core, ensure you have:
+tmux-parallel-coreをインストールする前に、以下のものがあることを確認してください。
 
-### Required
+### 必須
 
-- **tmux** 3.0 or higher
+- **tmux** 3.0以降
   ```bash
   # macOS
   brew install tmux
@@ -16,60 +16,60 @@ Before installing tmux-parallel-core, ensure you have:
   # Ubuntu/Debian
   sudo apt-get install tmux
 
-  # Check version
+  # バージョン確認
   tmux -V
   ```
 
 - **Claude Code CLI**
   ```bash
-  # Install via npm
+  # npm経由でインストール
   npm install -g @anthropic-ai/claude-code
 
-  # Or via homebrew (macOS)
+  # またはhomebrew経由（macOS）
   brew install anthropic-ai/tap/claude-code
 
-  # Verify installation
+  # インストール確認
   claude --version
   ```
 
-- **Git** (for version control)
+- **Git**（バージョン管理用）
   ```bash
   git --version
   ```
 
-### Optional but Recommended
+### 推奨（必須ではない）
 
-- **Node.js** 18+ (for running example projects)
-- **TypeScript** (for type checking)
-- **ESLint** (for linting)
-- **Jest** or **Vitest** (for testing)
+- **Node.js** 18以上（サンプルプロジェクトの実行用）
+- **TypeScript**（型チェック用）
+- **ESLint**（リント用）
+- **Jest** または **Vitest**（テスト用）
 
-## Installation
+## インストール
 
-### Step 1: Clone or Download
+### ステップ1：クローンまたはダウンロード
 
 ```bash
-# If you have the repository
+# リポジトリがある場合
 cd /path/to/shogun-arrangement/tmux-parallel-core
 
-# Or create from scratch
+# またはゼロから作成
 mkdir -p ~/projects/tmux-parallel-core
 cd ~/projects/tmux-parallel-core
 ```
 
-### Step 2: Make Scripts Executable
+### ステップ2：スクリプトに実行権限を付与
 
 ```bash
 chmod +x init.sh start.sh
 ```
 
-### Step 3: Initialize Directory Structure
+### ステップ3：ディレクトリ構造を初期化
 
 ```bash
 ./init.sh
 ```
 
-This creates:
+これにより以下が作成されます：
 ```
 tmux-parallel-core/
 ├── queue/
@@ -92,311 +92,313 @@ tmux-parallel-core/
 └── project/
 ```
 
-### Step 4: Configure Claude Code
+### ステップ4：Claude Codeを設定
 
-Ensure Claude Code is authenticated:
+Claude Codeが認証されていることを確認してください：
 
 ```bash
-# Login to Claude
+# Claudeにログイン
 claude login
 
-# Verify authentication
+# 認証を確認
 claude auth status
 ```
 
-## Starting the System
+## システムの起動
 
-### Basic Start
+### 基本的な起動
 
 ```bash
 ./start.sh
 ```
 
-This creates 3 tmux sessions:
-- **director** - Strategic planning
-- **captain** - Coordination and monitoring
-- **players** - Execution (3 panes: player1, player2, player3)
+これにより3つのtmuxセッションが作成されます：
+- **director** - 戦略的計画
+- **captain** - 調整と監視
+- **players** - 実行（3つのペイン：player1, player2, player3）
 
-### Start with Custom Player Count
+### カスタムプレイヤー数で起動
 
-```bash
-./start.sh -n 5  # Use 5 players instead of 3
+```bash```bash
+_
+```
+./start.sh -n 5  # 3の代わりに5人のプレイヤーを使用
 ```
 
-### Setup-Only Mode (Manual Claude Start)
+### セットアップのみモード（Claudeの手動起動）
 
 ```bash
-./start.sh -s  # Create sessions without starting Claude
+./start.sh -s  # Claudeを起動せずにセッションを作成
 ```
 
-Then manually start Claude in each pane:
+その後、各ペインで手動でClaudeを起動します：
 ```bash
-# In each tmux pane
+# 各tmuxペインで
 claude
 ```
 
-## Attaching to Sessions
+## セッションへのアタッチ
 
-### View All Sessions
+### 全セッションの表示
 
 ```bash
 tmux list-sessions
 ```
 
-Expected output:
+期待される出力：
 ```
 director: 1 windows (created Fri Jan 31 10:00:00 2026)
 captain: 1 windows (created Fri Jan 31 10:00:00 2026)
 players: 1 windows (created Fri Jan 31 10:00:00 2026)
 ```
 
-### Attach to Specific Session
+### 特定のセッションにアタッチ
 
 ```bash
-# Attach to Director (strategic planning)
+# ディレクターにアタッチ（戦略的計画）
 tmux attach-session -t director
 
-# Attach to Captain (coordination)
+# キャプテンにアタッチ（調整）
 tmux attach-session -t captain
 
-# Attach to Players (execution)
+# プレイヤーにアタッチ（実行）
 tmux attach-session -t players
 ```
 
-### Detach from Session
+### セッションからのデタッチ
 
-While inside a tmux session, press:
+tmuxセッション内で、以下を押します：
 ```
-Ctrl+b, then d
+Ctrl+b、その後d
 ```
 
-## Configuration
+## 設定
 
-### Customize Player Count
+### プレイヤー数のカスタマイズ
 
-Edit `start.sh`:
+`start.sh`を編集します：
 ```bash
-# Find this line
+# この行を見つける
 NUM_PLAYERS=${1:-3}
 
-# Change default from 3 to desired number
+# デフォルトを3から希望の数に変更
 NUM_PLAYERS=${1:-5}
 ```
 
-### Customize Agent Instructions
+### エージェント指示のカスタマイズ
 
-Edit the `agents.md` files:
+`agents.md`ファイルを編集します：
 
-- **Director**: `director/agents.md`
-- **Captain**: `captain/agents.md`
-- **Players**: `player1/agents.md`, `player2/agents.md`, `player3/agents.md`
+- **ディレクター**: `director/agents.md`
+- **キャプテン**: `captain/agents.md`
+- **プレイヤー**: `player1/agents.md`、`player2/agents.md`、`player3/agents.md`
 
-### Add Project Files
+### プロジェクトファイルの追加
 
-Place your actual project in the `project/` directory:
+実際のプロジェクトを`project/`ディレクトリに配置します：
 
 ```bash
 cd project/
 
-# Example: Initialize a Node.js project
+# 例：Node.jsプロジェクトを初期化
 npm init -y
 npm install --save-dev typescript jest @types/jest
 
-# Create source directory
+# ソースディレクトリの作成
 mkdir -p src/__tests__
 ```
 
-All players access this shared project via symlinks:
+すべてのプレイヤーはシンボリックリンク経由でこの共有プロジェクトにアクセスします：
 - `player1/project` → `../project`
 - `player2/project` → `../project`
 - `player3/project` → `../project`
 
-## First Task Example
+## 最初のタスクの例
 
-### 1. Attach to Director
+### 1. ディレクターにアタッチ
 
 ```bash
 tmux attach-session -t director
 ```
 
-### 2. Give a Task to Director
+### 2. ディレクターにタスクを与える
 
-Type in the Director session:
+ディレクターセッションで入力：
 ```
-Implement a simple calculator function in TypeScript
+TypeScriptでシンプルな計算機関数を実装してください
 
-Requirements:
-- Function: add(a: number, b: number): number
-- Write tests first (TDD)
-- 80% test coverage
-- Use Jest for testing
+要件：
+- 関数：add(a: number, b: number): number
+- テストファースト（TDD）
+- 80%のテストカバレッジ
+- Jestを使用してテスト
 ```
 
-### 3. Director Decomposes and Assigns
+### 3. ディレクターがタスクを分解して割り当て
 
-Director creates tasks and writes to `queue/director_to_captain.yaml`:
+ディレクターがタスクを作成し、`queue/director_to_captain.yaml`に書き込みます：
 ```yaml
 command:
   id: cmd_001
-  description: "Implement calculator function"
+  description: "計算機関数を実装"
   type: feature
   tdd_required: true
 
   subtasks:
     - id: subtask_001
-      description: "Write tests for add function"
+      description: "add関数のテストを書く"
       assigned_to: player1
       type: test
 
     - id: subtask_002
-      description: "Implement add function"
+      description: "add関数を実装"
       assigned_to: player2
       type: feature
       depends_on: subtask_001
 ```
 
-### 4. Director Notifies Captain
+### 4. ディレクターがキャプテンに通知
 
-Director runs:
+ディレクターが実行：
 ```bash
-tmux send-keys -t captain:0.0 'New instructions in queue/director_to_captain.yaml. Execute.'
+tmux send-keys -t captain:0.0 'queue/director_to_captain.yamlに新しい指示があります。実行してください。'
 tmux send-keys -t captain:0.0 Enter
 ```
 
-### 5. Monitor Progress
+### 5. 進捗の監視
 
-Detach from Director and attach to Captain:
+ディレクターからデタッチしてキャプテンにアタッチ：
 ```bash
-# Detach: Ctrl+b, then d
+# デタッチ：Ctrl+b、その後d
 tmux attach-session -t captain
 ```
 
-Watch Captain relay tasks to Players and update `dashboard.md`.
+キャプテンがプレイヤーにタスクを中継し、`dashboard.md`を更新する様子を見てください。
 
-### 6. View Results
+### 6. 結果の確認
 
-Check `dashboard.md` for progress:
+進捗を確認するために`dashboard.md`をチェック：
 ```bash
 cat dashboard.md
 ```
 
-## Troubleshooting
+## トラブルシューティング
 
-### Sessions Not Created
+### セッションが作成されない
 
-**Problem**: `./start.sh` runs but sessions don't appear
+**問題**: `./start.sh`は実行されるが、セッションが表示されない
 
-**Solution**:
+**解決策**:
 ```bash
-# Kill any existing sessions
+# 既存のセッションを終了
 tmux kill-session -t director
 tmux kill-session -t captain
 tmux kill-session -t players
 
-# Try again
+# 再試行
 ./start.sh
 ```
 
-### Claude Not Authenticated
+### Claudeが認証されていない
 
-**Problem**: "Not logged in" error
+**問題**: "ログインしていません"エラー
 
-**Solution**:
+**解決策**:
 ```bash
 claude login
-# Follow authentication prompts
+# 認証プロンプトに従う
 ```
 
-### Permission Denied on Scripts
+### スクリプトで権限が拒否される
 
-**Problem**: `./start.sh: Permission denied`
+**問題**: `./start.sh: Permission denied`
 
-**Solution**:
+**解決策**:
 ```bash
 chmod +x init.sh start.sh
 ```
 
-### Symlinks Not Working
+### シンボリックリンクが動作しない
 
-**Problem**: `player1/project` symlink broken
+**問題**: `player1/project`シンボリックリンクが壊れている
 
-**Solution**:
+**解決策**:
 ```bash
-# Remove broken symlink
+# 壊れたシンボリックリンクを削除
 rm player1/project
 
-# Recreate
+# 再作成
 ln -s ../project player1/project
 
-# Verify
+# 確認
 ls -la player1/project
 ```
 
-### tmux send-keys Not Working
+### tmux send-keysが動作しない
 
-**Problem**: Messages not received by Captain/Players
+**問題**: キャプテン/プレイヤーがメッセージを受け取らない
 
-**Solution**: Always use 2 separate calls:
+**解決策**: 常に2つの別々の呼び出しを使用：
 ```bash
-# WRONG
+# 間違い
 tmux send-keys -t captain:0.0 'message' Enter
 
-# CORRECT
+# 正しい
 tmux send-keys -t captain:0.0 'message'
 tmux send-keys -t captain:0.0 Enter
 ```
 
-### Queue Files Not Found
+### キューファイルが見つからない
 
-**Problem**: "File not found: queue/director_to_captain.yaml"
+**問題**: "ファイルが見つかりません：queue/director_to_captain.yaml"
 
-**Solution**:
+**解決策**:
 ```bash
-# Re-run initialization
+# 初期化を再実行
 ./init.sh
 
-# Or manually create
+# または手動で作成
 mkdir -p queue/captain_to_players
 touch queue/director_to_captain.yaml
 touch queue/captain_to_players/player{1,2,3}.yaml
 ```
 
-## Advanced Usage
+## 高度な使用方法
 
-### Background Execution
+### バックグラウンド実行
 
-Keep tmux sessions running in background:
+tmuxセッションをバックグラウンドで実行し続ける：
 ```bash
-# Start system
+# システムを起動
 ./start.sh
 
-# Detach from all sessions
-# Press Ctrl+b, then d in each session
+# すべてのセッションからデタッチ
+# 各セッションでCtrl+b、その後dを押す
 
-# Sessions continue running in background
-# Reattach anytime with:
+# セッションはバックグラウンドで実行し続ける
+# いつでも再アタッチ可能：
 tmux attach-session -t director
 ```
 
-### Multiple Projects
+### 複数のプロジェクト
 
-Run separate instances for different projects:
+異なるプロジェクトで別々のインスタンスを実行：
 ```bash
-# Project A
+# プロジェクトA
 cd ~/projects/project-a/tmux-parallel-core
 ./start.sh
 
-# Project B (use different session names)
+# プロジェクトB（異なるセッション名を使用）
 cd ~/projects/project-b/tmux-parallel-core
-# Edit start.sh to use different session names
+# start.shを編集して異なるセッション名を使用する
 ./start.sh
 ```
 
-### Monitor All Sessions
+### 全セッションの監視
 
-View all activity at once:
+すべてのアクティビティを一度に表示：
 ```bash
-# Split terminal into 3 panes
+# ターミナルを3つのペインに分割
 tmux new-session \; \
   split-window -h \; \
   split-window -v \; \
@@ -408,61 +410,61 @@ tmux new-session \; \
   send-keys 'tmux attach-session -t players' C-m
 ```
 
-### Logging
+### ロギング
 
-Capture session output to files:
+セッション出力をファイルにキャプチャ：
 ```bash
-# Enable logging for a session
+# セッションのロギングを有効化
 tmux pipe-pane -o -t director 'cat >> director.log'
 tmux pipe-pane -o -t captain 'cat >> captain.log'
 tmux pipe-pane -o -t players 'cat >> players.log'
 
-# Disable logging
+# ロギングを無効化
 tmux pipe-pane -t director
 ```
 
-## Stopping the System
+## システムの停止
 
-### Graceful Shutdown
+### 通常のシャットダウン
 
 ```bash
-# Kill all sessions
+# すべてのセッションを終了
 tmux kill-session -t director
 tmux kill-session -t captain
 tmux kill-session -t players
 ```
 
-### Force Kill
+### 強制終了
 
 ```bash
-# Kill all tmux sessions
+# すべてのtmuxセッションを終了
 tmux kill-server
 ```
 
-## Next Steps
+## 次のステップ
 
-After setup, refer to:
+セットアップ後、以下を参照してください：
 
-1. **[README.md](README.md)** - Architecture overview and quick reference
-2. **[docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md)** - Complete development workflow
-3. **[docs/PROMPTING_GUIDE.md](docs/PROMPTING_GUIDE.md)** - How to write effective prompts
-4. **[docs/QUALITY_GATES.md](docs/QUALITY_GATES.md)** - Code quality standards
+1. **[README.md](README.md)** - アーキテクチャの概要とクイックリファレンス
+2. **[docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md)** - 完全な開発ワークフロー
+3. **[docs/PROMPTING_GUIDE.md](docs/PROMPTING_GUIDE.md)** - 効果的なプロンプトの書き方
+4. **[docs/QUALITY_GATES.md](docs/QUALITY_GATES.md)** - コード品質基準
 
-## Getting Help
+## ヘルプの入手
 
-- **Issues**: Report bugs or request features on GitHub
-- **Documentation**: Read the docs/ directory for detailed guides
-- **Examples**: Check `project/` for example implementations
+- **問題**: GitHubでバグを報告したり、機能をリクエストしたりしてください
+- **ドキュメント**: 詳細なガイドについてはdocs/ディレクトリを読んでください
+- **例**: 実装例については`project/`をチェックしてください
 
-## Summary
+## まとめ
 
-**Minimum steps to get started:**
+**開始するための最小手順：**
 
-1. Install prerequisites (tmux, Claude Code)
-2. Run `./init.sh`
-3. Run `./start.sh`
-4. Attach to director: `tmux attach-session -t director`
-5. Give a task to Director
-6. Monitor progress in Captain and Players sessions
+1. 前提条件をインストール（tmux、Claude Code）
+2. `./init.sh`を実行
+3. `./start.sh`を実行
+4. ディレクターにアタッチ：`tmux attach-session -t director`
+5. ディレクターにタスクを与える
+6. キャプテンとプレイヤーセッションで進捗を監視
 
-**That's it! You're ready to use AI-driven parallel development.**
+**以上です！AI駆動の並列開発を使用する準備ができました。**

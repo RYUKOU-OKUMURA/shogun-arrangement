@@ -1,0 +1,10 @@
+# Captain → Player 5 task assignment
+# Captain writes tasks here, Player 5 reads
+
+task:
+  id: null
+  parent_id: null
+  description: null
+  goal: null
+  status: idle  # idle | assigned | in_progress | done | failed | blocked
+  timestamp: ""
