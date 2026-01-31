@@ -100,6 +100,10 @@ command:
         - エッジケース：期限切れトークン、無効な認証情報、ヘッダーの欠落
         - 関連ファイル：src/auth/*, src/middleware/auth.ts
 
+      # 成果物の保存先（重要！必ず指定する）
+      output_location: "src/auth/__tests__/auth.test.ts"
+      output_format: "typescript"
+
       quality_gates:
         - lint: required
         - typecheck: required
@@ -119,11 +123,39 @@ command:
         - セキュリティ：ハッシュにbcrypt、トークンにjwtを使用
         - エラーハンドリング：無効なトークンに対して401を返す
 
+      # 成果物の保存先（重要！必ず指定する）
+      output_location: "src/auth/middleware.ts"
+      output_format: "typescript"
+
       quality_gates:
         - lint: required
         - typecheck: required
         - security_review: required
         - test: must_pass_existing_tests
+```
+
+**レポート系タスクの場合の例:**
+```yaml
+  subtasks:
+    - id: subtask_003
+      description: "技術調査レポートを作成"
+      assigned_to: player3
+      goal: "Astro + React統合方法を調査"
+      type: docs
+
+      context: |
+        - 調査テーマ：AstroフレームワークでのReact統合
+        - 調査項目：Island Architecture、認証方法、ステート管理
+        - 参考リソース：公式ドキュメント、技術記事
+
+      # 成果物の保存先（レポート系は必ずdocs/reports/に指定）
+      output_location: "docs/reports/"
+      output_format: "markdown"
+      output_filename: "player3_react-investigation.md"  # ファイル名も指定
+
+      quality_gates:
+        - comprehensive: true  # 包括的な内容であること
+        - sources_cited: true  # 参考ソースを明記すること
 ```
 
 ### 3. キャプテンに通知する（必須の自動アクション - 必ず行ってください！）
@@ -141,6 +173,66 @@ tmux send-keys -t captain:0.0 Enter
 ```
 
 **注**：常に2つの別々のBashツール呼び出しを使用してください。`&&`でチェーンしないでください。
+
+### 4. タスク完了を監視する（必須）
+
+Captainがタスクを割り当てた後、以下の手順で完了を監視します：
+
+```bash
+# 1. 10-20秒ごとに進捗を確認
+ls -la docs/reports/
+
+# 2. 各プレイヤーのYAMLステータスを確認
+grep -A 3 "^  status:" queue/captain_to_players/player*.yaml
+
+# 3. 全員が完了したら次の手順へ進む
+# status: completed または done を確認
+```
+
+### 5. 全タスク完了時の報告（必須）
+
+全プレイヤーのタスクが完了したら、以下の手順でユーザーに報告します：
+
+**手順1: 各プレイヤーのレポートを収集**
+```bash
+# レポートを確認
+ls -la docs/reports/
+
+# 各レポートを読んで要約
+```
+
+**手順2: 統合レポートを作成**
+```markdown
+# タスク完了報告
+
+## タスク概要
+- タスクID: xxx
+- 指示日時: xxx
+- 完了日時: xxx
+
+## 各プレイヤーの成果物
+
+### Player1
+- ステータス: ✅ 完了
+- レポート: [ファイル名]
+- 要約: [要点]
+
+### Player2
+- ステータス: ✅ 完了
+- レポート: [ファイル名]
+- 要約: [要点]
+...
+
+## 総合所感
+[全体のまとめ]
+
+## 次のアクション
+[必要に応じて]
+```
+
+**手順3: ユーザーに直接報告**
+- 統合レポートをユーザーに提示
+- 重要な発見や推奨事項を強調
 
 ## 重要なルール
 
@@ -202,6 +294,24 @@ tmux send-keys -t captain:0.0 Enter
 - **品質問題**：テストが失敗、カバレッジが80%未満 → 停止して修正
 - **スコープクリープ**：PRが200行を超えて増加 → 小さなタスクに分割
 - **不安定なテスト**：同じテストが断続的に失敗 → 優先修正
+- **YAMLステータス不整合**：レポートがあるのにstatusがassignedのまま → プレイヤーに更新を督促
+
+### YAMLステータス不整合のチェック
+
+CaptainがYAMLステータスの不整合を検出できない場合、Directorが直接確認します：
+
+```bash
+# レポートがあるのにYAMLが未更新のプレイヤーを検出
+for i in {1..5}; do
+  yaml="queue/captain_to_players/player$i.yaml"
+  if ls docs/reports/player${i}_*.md 2>/dev/null; then
+    if grep -q "status: assigned" $yaml; then
+      echo "Player $i: YAMLステータス未更新を検出"
+      # Captainに指示を出すか、直接修正
+    fi
+  fi
+done
+```
 
 ## ペイン参照
 

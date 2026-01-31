@@ -2,29 +2,71 @@
 # Captain writes tasks here, Player 3 reads
 
 task:
-  id: TASK-2025-0201-003
+  id: TASK-2025-0201-103
   parent_id: null
-  description: Astro + Tailwindで構築された既存のWEBサイトに、Reactベースの管理画面（ダッシュボード）を追加するアーキテクチャについてリサーチを行い、その実装方法が適切かどうかを検証してください。
+  description: /clear コマンド実行 & レスポンシブデザインの調査
   goal: |
-    ## 通信確認タスク: Astro + React管理画面の実装調査
+    ## ステップ1: チャットクリア
+    まず `/clear` コマンドを実行してチャットをリフレッシュしてください。
+
+    ## ステップ2: レスポンシブデザインの調査
+
+    ### 調査テーマ：
+    「すべてのデバイスで美しく表示させるために」
 
     ### 調査項目:
-    1. AstroフレームワークでのReact統合方法（Island Architecture）
-    2. 管理画面（ダッシュボード）の実装パターン
-    3. データ管理のベストプラクティス（ローカルステート vs バックエンド連携）
-    4. Tailwind CSSとの共存方法
-    5. 認証・認可の実装方法
+
+    #### モバイルファースト設計
+    1. **モバイルファーストの基本**
+       - なぜモバイルファーストが必要か
+       - モバイルからデザインを始めるメリット
+       - コンテンツの優先順位付け
+
+    2. **ブレイクポイントの設計**
+       - 主要なブレイクポイント（320px, 768px, 1024px, 1440px）
+       - コンテンツベースのブレイクポイント設定
+       - Tailwind CSSのブレイクポイント戦略
+
+    3. **フレキシブルレイアウト**
+       - Flexbox vs Gridの使い分け
+       - フルードタイプ（clamp(), min(), max()）
+       - コンテナクエリの活用
+
+    #### レスポンシブ対応のベストプラクティス
+    1. **画像の最適化**
+       - レスポンシブ画像（srcset, sizes）
+       - 画像フォーマットの選択（WebP, AVIF）
+       - アートディレクション（画像の出し分け）
+
+    2. **タッチターゲットのサイズ**
+       - 最小サイズ（44x44px以上）
+       - 適切な余白と間隔
+       - スワイプやジェスチャーへの対応
+
+    3. **パフォーマンス最適化**
+       - クリティカルレンダリングパス
+       - レイジーローディング
+       - コード分割
+
+    4. **デバイス固有の考慮事項**
+       - スクロールバーの表示/非表示
+       - ホバー効果の代替案
+       - セーフエリア（iOS notch対応）
+
+    ### 参考リソース:
+    - MDN Responsive Design
+    - Responsive Web Design（書籍）
+    - Smashing Magazineの記事
 
     ### 提出物:
     - レポートを `docs/reports/` ディレクトリにMarkdown形式で作成
-    - ファイル名: `player3_react-dashboard-investigation.md`
+    - ファイル名: `player3_responsive-design.md`
+    - 具体的なCSSコード例を含めること
+    - Tailwind CSSでの実装例を含めること
 
     ### 期限:
     - 24時間以内
 
-    ### 注意事項:
-    - これは通信確認タスクです。報告することを優先してください。
   status: completed
-  timestamp: "2025-02-01T00:00:00+09:00"
-  completed_at: "2026-02-01T00:30:00+09:00"
-  report_location: "player3/docs/reports/player3_react-dashboard-investigation.md"
+  timestamp: "2025-02-01T01:00:00+09:00"
+  completed_at: "2026-02-01T02:00:00+09:00"

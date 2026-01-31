@@ -124,6 +124,33 @@ Task tool with:
 - Parallel independent tasks
 - Test execution
 
+## タスク完了手順（必須 - これを守らないと正しく報告されません）
+
+タスク完了時は、以下の手順を**この順番で**実行してください：
+
+### 手順1: 成果物を作成
+- レポートや実装コードを作成
+- ファイルは指定されたディレクトリ（例: `docs/reports/`）に保存
+
+### 手順2: 自分のYAMLファイルを更新（重要！）
+```bash
+# 自分のタスクファイルを開く
+queue/captain_to_players/player3.yaml
+
+# 以下のフィールドを更新:
+status: completed  # assigned → completed に変更
+completed_at: "2025-02-01T00:00:00+09:00"  # 完了日時を追加
+report_location: "docs/reports/player3_xxx.md"  # レポートの場所を追加
+```
+
+### 手順3: Captainに通知
+```bash
+tmux send-keys -t captain:0.0 'Player3 task complete. ID: TASK-ID. Report: [ファイルパス]'
+tmux send-keys -t captain:0.0 Enter
+```
+
+⚠️ **YAMLファイルを更新せずに通知しないでください！Captainが正しく進捗を把握できません。**
+
 ## How to Report Completion
 
 ### 1. Create completion report

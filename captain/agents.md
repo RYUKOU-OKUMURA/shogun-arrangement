@@ -102,12 +102,81 @@ sleep 15 && ls -la docs/reports/
 # 5. 完了していないなら再度通知...を繰り返す
 ```
 
+### YAMLステータス不整合の検出と修正（重要）
+
+プレイヤーがレポートを作成したのにYAMLのステータスが「assigned」のままのケースを検出・修正します：
+
+```bash
+# 1. レポートの有無を確認
+ls -la docs/reports/
+
+# 2. レポートがあるのにstatus: assignedのままのプレイヤーを探す
+for i in {1..5}; do
+  yaml_file="queue/captain_to_players/player$i.yaml"
+  report_file="docs/reports/player${i}_*.md"
+  if ls $report_file 2>/dev/null && grep -q "status: assigned" $yaml_file; then
+    echo "Player $i: レポートがありますがYAMLが未更新です"
+    # 手動でYAMLを更新する必要あり
+  fi
+done
+
+# 3. 不整合がある場合、プレイヤーにYAML更新を指示
+tmux send-keys -t players:0.X "レポートは作成済みですが、YAMLファイルのstatusをcompletedに更新してください"
+tmux send-keys -t players:0.X Enter
+```
+
+### エラーハンドリング（APIエラー時の対処）
+
+APIエラー(500)が発生した場合の対処手順：
+
+```bash
+# 1. Captain自身のエラー対処
+# APIエラーが発生したら、以下の手順で復旧：
+
+# Ctrl+Cで現在の処理をキャンセル
+tmux send-keys -t captain:0.0 C-c
+
+# 2秒待つ
+sleep 2
+
+# 再度指示を読み込むよう通知
+tmux send-keys -t captain:0.0 'queue/director_to_captain.yamlを再読み込みしてください'
+tmux send-keys -t captain:0.0 Enter
+
+# 2. プレイヤーのエラー対処
+# プレイヤーがAPIエラーで停止している場合：
+tmux send-keys -t players:0.X C-c
+sleep 2
+tmux send-keys -t players:0.X 'タスクを再開してください。queue/captain_to_players/playerX.yamlを確認'
+tmux send-keys -t players:0.X Enter
+```
+
 ### 報告の受領
 
 1. プレイヤーからsend-keys経由で通知を受ける
 2. プレイヤーのフォルダから報告を読む
 3. `dashboard.md`を更新する
-4. すべてのタスクが完了したら、ディレクターにステータスを更新する
+
+### 全タスク完了時のDirectorへの報告（厳守）
+
+**全プレイヤーのタスクが完了し、全レポートが出揃ったら、必ずDirectorに報告すること。**
+
+```bash
+# 報告手順（必ず実行すること）
+
+# 1. 全プレイヤーの完了を確認
+ls -la docs/reports/
+
+# 2. Directorに報告
+tmux send-keys -t director:0.0 "Captain: All tasks completed. Reports submitted to docs/reports/"
+tmux send-keys -t director:0.0 Enter
+
+# 3. 詳細なサマリーを含める場合
+tmux send-keys -t director:0.0 "Captain: Task Summary: Player1(completed), Player2(completed), Player3(completed), Player4(completed), Player5(completed)"
+tmux send-keys -t director:0.0 Enter
+```
+
+**重要:** これは厳守ルールです。全タスク完了時は必ずDirectorに報告してください。
 
 ## タスクの割り当て方法
 
@@ -221,6 +290,7 @@ tmux send-keys -t players:0.0 Enter
 
 | ルール | 理由 |
 |--------|------|
+| **全タスク完了時にDirectorへ報告（厳守）** | **Directorは全プレイヤーの完了を知る必要がある** |
 | タスクを実行しない | あなたの役割は調整 |
 | 常にダッシュボードを更新 | ディレクターには可視性が必要 |
 | プレイヤー1人に1つのタスク | 過負荷を防ぐ |
