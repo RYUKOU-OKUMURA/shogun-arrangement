@@ -1,0 +1,9 @@
+# Director → Captain command queue
+# Director writes commands here, Captain reads
+
+command:
+  id: null
+  timestamp: ""
+  description: null
+  status: idle  # idle | pending | in_progress | done
+  subtasks: []
