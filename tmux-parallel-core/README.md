@@ -43,6 +43,8 @@ tmux attach-session -t captain    # Coordination
 tmux attach-session -t players    # Execution
 ```
 
+**📖 For detailed setup instructions, see [SETUP.md](SETUP.md)**
+
 ## Communication Flow
 
 1. **User → Director**: Direct input in director session
@@ -154,6 +156,13 @@ Players can use Claude Code's Task tool to spawn sub-agents for:
 ## Documentation
 
 Comprehensive guides for AI-driven development:
+
+- **[Setup Guide](SETUP.md)** - Complete installation and setup instructions
+  - Prerequisites and installation
+  - Starting and stopping the system
+  - Configuration and customization
+  - Troubleshooting
+  - First task example
 
 - **[AI Workflow](docs/AI_WORKFLOW.md)** - Complete AI-driven development workflow
   - TDD process (RED-GREEN-REFACTOR)
