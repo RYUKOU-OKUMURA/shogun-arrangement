@@ -2,8 +2,14 @@
 # Director writes commands here, Captain reads
 
 command:
-  id: null
-  timestamp: ""
-  description: null
-  status: idle  # idle | pending | in_progress | done
-  subtasks: []
+  id: CMD-2025-0201-001
+  timestamp: "2025-02-01T00:00:00+09:00"
+  description: 通信確認タスクを各プレイヤーに割り当てました。各プレイヤーがタスクを確認し、調査を開始できるように通知してください。
+  status: completed
+  subtasks:
+    - player1に連絡
+    - player2に連絡
+    - player3に連絡
+    - player4に連絡
+    - player5に連絡
+    - 全員がタスクを理解したか確認

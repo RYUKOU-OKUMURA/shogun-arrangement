@@ -2,9 +2,27 @@
 # Captain writes tasks here, Player 4 reads
 
 task:
-  id: null
+  id: TASK-2025-0201-004
   parent_id: null
-  description: null
-  goal: null
-  status: idle  # idle | assigned | in_progress | done | failed | blocked
-  timestamp: ""
+  description: Astro + Tailwindで構築された既存のWEBサイトに、Reactベースの管理画面（ダッシュボード）を追加するアーキテクチャについてリサーチを行い、その実装方法が適切かどうかを検証してください。
+  goal: |
+    ## 通信確認タスク: Astro + React管理画面の実装調査
+
+    ### 調査項目:
+    1. AstroフレームワークでのReact統合方法（Island Architecture）
+    2. 管理画面（ダッシュボード）の実装パターン
+    3. データ管理のベストプラクティス（ローカルステート vs バックエンド連携）
+    4. Tailwind CSSとの共存方法
+    5. 認証・認可の実装方法
+
+    ### 提出物:
+    - レポートを `docs/reports/` ディレクトリにMarkdown形式で作成
+    - ファイル名: `player4_react-dashboard-investigation.md`
+
+    ### 期限:
+    - 24時間以内
+
+    ### 注意事項:
+    - これは通信確認タスクです。報告することを優先してください。
+  status: assigned
+  timestamp: "2025-02-01T00:00:00+09:00"

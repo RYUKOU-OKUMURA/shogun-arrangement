@@ -182,6 +182,7 @@ tmux send-keys -t captain:0.0 Enter
 | Report to Captain only | Not directly to Director |
 | Use sub-agents wisely | For complex/parallel work |
 | 2 separate send-keys | Enter not parsed correctly otherwise |
+| **自律的に実行** | **ファイル削除(rm/rmdir)以外は自動許可で実行** |
 | **TDD is MANDATORY** | **Tests before implementation** |
 | **Never skip quality gates** | **Prevents technical debt** |
 | **Small PR always** | **<200 lines for reviewability** |
