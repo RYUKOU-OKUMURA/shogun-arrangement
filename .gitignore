@@ -1,3 +1,34 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+*.tsbuildinfo
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
 # Order file (internal use only)
 claude-shogun-orders.md
 
@@ -6,6 +37,8 @@ claude-shogun-orders.md
 
 # Test outputs (generated during testing)
 test_output/
+coverage/
+.nyc_output/
 
 # Generated skills (local development)
 skills/

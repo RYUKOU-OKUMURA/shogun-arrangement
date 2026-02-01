@@ -47,29 +47,29 @@
        └── player3.yaml               # Captain → Player3
    ```
 
-   - [ ] YAML読み書きユーティリティ作成 (`utils/yaml-handler.ts`)
-   - [ ] タスクスキーマ定義 (Zod validation)
-   - [ ] 通信プロトコル実装 (send-keys自動化)
+   - [x] YAML読み書きユーティリティ作成 (`src/core/yaml-handler.ts`)
+   - [x] タスクスキーマ定義 (Zod validation)
+   - [x] 通信プロトコル実装 (send-keys自動化)
 
 2. **Director自動化スクリプト**
-   - [ ] `director/director.ts` - ユーザー入力受付
-   - [ ] タスク分解ロジック (AI-Driven原則に従う)
-   - [ ] YAML生成 & Captain通知
-   - [ ] Progress監視 (dashboard.md polling)
+   - [x] `src/director/director.ts` - ユーザー入力受付
+   - [x] タスク分解ロジック (AI-Driven原則に従う)
+   - [x] YAML生成 & Captain通知
+   - [x] Progress監視 (dashboard.md polling)
 
 3. **Captain自動化スクリプト**
-   - [ ] `captain/captain.ts` - Director指示受信
-   - [ ] プロンプト最適化エンジン (context enrichment)
-   - [ ] Player割り当てロジック
-   - [ ] Quality Gate監視
-   - [ ] Dashboard更新自動化
+   - [x] `src/captain/captain.ts` - Director指示受信
+   - [x] プロンプト最適化エンジン (context enrichment)
+   - [x] Player割り当てロジック
+   - [x] Quality Gate監視
+   - [x] Dashboard更新自動化
 
 4. **Player自動化スクリプト**
-   - [ ] `player*/player.ts` - Captain指示受信
-   - [ ] TDDワークフロー実行 (RED-GREEN-REFACTOR)
-   - [ ] Sub-agent起動 (Task tool integration)
-   - [ ] Quality Gate検証
-   - [ ] 完了レポート自動生成
+   - [x] `src/player/player.ts` - Captain指示受信
+   - [x] TDDワークフロー実行 (RED-GREEN-REFACTOR)
+   - [x] Sub-agent起動 (Task tool integration)
+   - [x] Quality Gate検証
+   - [x] 完了レポート自動生成
 
 #### 前提条件
 - Node.js 18+

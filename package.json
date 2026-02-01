@@ -1,0 +1,42 @@
+{
+  "name": "shogun-arrangement",
+  "version": "0.1.0",
+  "description": "Multi-agent AI-driven development system with tmux orchestration",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "dev": "tsx watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "director": "tsx src/director/director.ts",
+    "captain": "tsx src/captain/captain.ts",
+    "player": "tsx src/player/player.ts"
+  },
+  "dependencies": {
+    "zod": "^3.22.4",
+    "yaml": "^2.3.4",
+    "chalk": "^5.3.0",
+    "ora": "^7.0.1",
+    "chokidar": "^3.5.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "tsx": "^4.7.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.11",
+    "ts-jest": "^29.1.1"
+  }
+}
