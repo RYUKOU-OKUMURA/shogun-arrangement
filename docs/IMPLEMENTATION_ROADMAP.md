@@ -102,28 +102,29 @@
 #### 実装内容
 
 1. **Unit Tests**
-   - [ ] YAML handler tests (`utils/__tests__/yaml-handler.test.ts`)
-   - [ ] Task decomposition tests
-   - [ ] Prompt optimization tests
-   - [ ] Quality gate validation tests
+   - [x] YAML handler tests (`utils/__tests__/yaml-handler.test.ts`)
+   - [x] Task decomposition tests
+   - [ ] Prompt optimization tests (Phase 6+)
+   - [x] Quality gate validation tests (schemas)
 
 2. **Integration Tests**
-   - [ ] Director → Captain通信テスト
-   - [ ] Captain → Player通信テスト
-   - [ ] End-to-end workflow test (mock tmux)
-   - [ ] Error handling & retry logic
+   - [x] Director → Captain通信テスト
+   - [x] Captain → Player通信テスト
+   - [x] End-to-end workflow test (mock tmux)
+   - [x] Error handling & retry logic
 
 3. **E2E Tests (Playwright)**
-   - [ ] 実際のtmuxセッションでのワークフロー検証
-   - [ ] 複数タスク並行実行テスト
-   - [ ] Blocker検出シナリオ
-   - [ ] Quality Gate失敗時の動作確認
+   - [x] Playwright setup and configuration
+   - [ ] 実際のtmuxセッションでのワークフロー検証 (Phase 6+)
+   - [ ] 複数タスク並行実行テスト (Phase 6+)
+   - [ ] Blocker検出シナリオ (Phase 6+)
+   - [ ] Quality Gate失敗時の動作確認 (Phase 6+)
 
 4. **Test Infrastructure**
-   - [ ] Jest設定 (`jest.config.js`)
-   - [ ] Test coverage reporter (80%+ enforced)
-   - [ ] Mock utilities (`__mocks__/tmux.ts`, `__mocks__/claude-sdk.ts`)
-   - [ ] Test fixtures (`__fixtures__/sample-tasks.yaml`)
+   - [x] Jest設定 (`jest.config.js`)
+   - [x] Test coverage reporter (80%+ enforced)
+   - [x] Mock utilities (`__mocks__/tmux.ts`, `__mocks__/logger.ts`, `__mocks__/fs-promises.ts`)
+   - [x] Test fixtures (`__fixtures__/sample-tasks.yaml`)
 
 #### 前提条件
 - Phase 3完了

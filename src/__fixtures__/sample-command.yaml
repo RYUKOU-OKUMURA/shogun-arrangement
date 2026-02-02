@@ -1,0 +1,37 @@
+command_id: CMD-20260202-001
+timestamp: 2026-02-02T10:00:00Z
+user_request: Implement user authentication with JWT
+priority: high
+subtasks:
+  - id: TASK-20260202-001
+    description: Create JWT token generation utility
+    assigned_to: player1
+    goal: |
+      Implement JWT token generation and validation
+      - Use jsonwebtoken library
+      - Include user ID and email in payload
+      - Set expiration to 24 hours
+      - Follow TDD approach
+    type: feature
+    status: pending
+    quality_gates:
+      lint: true
+      typecheck: true
+      test_coverage: 80
+      max_lines: 200
+  - id: TASK-20260202-002
+    description: Create authentication middleware
+    assigned_to: player2
+    goal: |
+      Implement Express middleware for JWT verification
+      - Verify token from Authorization header
+      - Extract user from token
+      - Handle expired tokens
+      - Write comprehensive tests
+    type: feature
+    status: pending
+    quality_gates:
+      lint: true
+      typecheck: true
+      test_coverage: 80
+      max_lines: 200

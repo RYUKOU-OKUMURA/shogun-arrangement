@@ -1,0 +1,51 @@
+task_id: TASK-20260202-001
+command_id: CMD-20260202-001
+timestamp: 2026-02-02T10:30:00Z
+assigned_to: player1
+description: Create JWT token generation utility
+goal: |
+  Implement JWT token generation and validation
+  - Use jsonwebtoken library
+  - Include user ID and email in payload
+  - Set expiration to 24 hours
+  - Follow TDD approach
+type: feature
+status: in_progress
+priority: high
+context:
+  files: []
+  dependencies:
+    - jsonwebtoken
+    - @types/jsonwebtoken
+  related_tasks: []
+quality_gates:
+  lint: true
+  typecheck: true
+  test_coverage: 80
+  max_lines: 200
+  security_check: true
+enriched_prompt: |
+  ## Task: Create JWT token generation utility
+
+  ### Goal
+  Implement JWT token generation and validation following TDD principles.
+
+  ### Requirements
+  - Use jsonwebtoken library
+  - Include user ID and email in payload
+  - Set expiration to 24 hours
+  - Write tests first (RED phase)
+  - Implement functionality (GREEN phase)
+  - Refactor if needed (REFACTOR phase)
+
+  ### Quality Standards
+  - Test coverage >= 80%
+  - Keep PR < 200 lines
+  - Pass all linting and type checks
+  - Include security considerations
+
+  ### Success Criteria
+  - All tests pass
+  - Code is well-documented
+  - No security vulnerabilities
+  - Follows project coding standards
