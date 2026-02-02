@@ -1,0 +1,14 @@
+# Run lint-staged (includes prettier, eslint, and typecheck)
+npx lint-staged
+
+# Check for console.log statements (exclude scripts directory)
+STAGED_FILES=$(git diff --cached --name-only | grep -E '\.(ts|tsx)$' | grep -v '^scripts/')
+if [ -n "$STAGED_FILES" ]; then
+  if echo "$STAGED_FILES" | xargs grep -n 'console\.log' --color=never 2>/dev/null; then
+    echo "Error: Found console.log statements in staged files. Please remove them before committing."
+    exit 1
+  fi
+fi
+
+# Run tests
+npm test

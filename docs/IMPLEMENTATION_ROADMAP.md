@@ -153,31 +153,31 @@
 #### 実装内容
 
 1. **Pre-commit Hooks**
-   - [ ] Husky setup (`husky install`)
-   - [ ] Lint staged files (`lint-staged`)
-   - [ ] TypeScript type check
-   - [ ] Format with Prettier
-   - [ ] No `console.log` check
+   - [x] Husky setup (`husky install`)
+   - [x] Lint staged files (`lint-staged`)
+   - [x] TypeScript type check
+   - [x] Format with Prettier
+   - [x] No `console.log` check
 
 2. **PR Size Enforcer**
-   - [ ] `scripts/check-pr-size.ts`
-   - [ ] 200行警告、400行ブロック
-   - [ ] タスク分割提案生成
+   - [x] `scripts/check-pr-size.ts`
+   - [x] 200行警告、400行ブロック
+   - [x] タスク分割提案生成
 
 3. **Test Coverage Enforcer**
-   - [ ] `scripts/check-coverage.ts`
-   - [ ] 80%未満でCIを失敗させる
-   - [ ] カバレッジレポート自動コメント
+   - [x] `scripts/check-coverage.ts`
+   - [x] 80%未満でCIを失敗させる
+   - [x] カバレッジレポート自動コメント
 
 4. **Quality Gate Validator**
-   - [ ] `scripts/validate-quality-gates.ts`
-   - [ ] Lint/TypeCheck/Test/Coverage一括検証
-   - [ ] Player完了前に自動実行
+   - [x] `scripts/validate-quality-gates.ts`
+   - [x] Lint/TypeCheck/Test/Coverage一括検証
+   - [x] Player完了前に自動実行
 
 5. **Security Checks**
-   - [ ] No hardcoded secrets (GitGuardian or similar)
-   - [ ] Dependency vulnerability scan (npm audit)
-   - [ ] OWASP Top 10 基本チェック
+   - [x] No hardcoded secrets (GitGuardian or similar)
+   - [x] Dependency vulnerability scan (npm audit)
+   - [x] OWASP Top 10 基本チェック
 
 #### 前提条件
 - Phase 3, 4完了

@@ -33,7 +33,7 @@ export default {
       statements: 80,
     },
   },
-  coverageReporters: ['text', 'lcov', 'html', 'json'],
+  coverageReporters: ['text', 'lcov', 'html', 'json', 'json-summary'],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testTimeout: 10000,
   verbose: true,
