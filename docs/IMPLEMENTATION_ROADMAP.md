@@ -206,23 +206,23 @@
 #### 実装内容
 
 1. **Dashboard自動化**
-   - [ ] `dashboard.md` リアルタイム更新
-   - [ ] Player status (idle/working/blocked)
-   - [ ] Quality metrics (coverage, PR size, flaky tests)
-   - [ ] Blocker alerts
+   - [x] `dashboard.md` リアルタイム更新
+   - [x] Player status (idle/working/blocked)
+   - [x] Quality metrics (coverage, PR size, flaky tests)
+   - [x] Blocker alerts
 
 2. **メトリクス収集システム**
-   - [ ] `metrics/collector.ts`
-   - [ ] Task completion time tracking
-   - [ ] Test coverage history (time series)
-   - [ ] PR size trends
-   - [ ] Blocker frequency analysis
-   - [ ] Player utilization rate
+   - [x] `metrics/collector.ts`
+   - [x] Task completion time tracking
+   - [x] Test coverage history (time series)
+   - [x] PR size trends
+   - [x] Blocker frequency analysis
+   - [x] Player utilization rate
 
 3. **可視化**
-   - [ ] CLI dashboard (blessed or ink)
-   - [ ] メトリクスレポート生成 (weekly/monthly)
-   - [ ] 異常値アラート (coverage急低下、PR肥大化など)
+   - [x] CLI dashboard (blessed or ink)
+   - [x] メトリクスレポート生成 (weekly/monthly)
+   - [x] 異常値アラート (coverage急低下、PR肥大化など)
 
 4. **KPI定義**
    - Review wait time: < 2 hours
