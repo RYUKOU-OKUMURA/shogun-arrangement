@@ -2,54 +2,32 @@
 # Captain writes tasks here, Player 1 reads
 
 task:
-  id: TASK-2025-0201-101
-  parent_id: null
-  description: /clear コマンド実行 & UI/UX基本原則の調査
+  id: subtask_005_1
+  parent_id: cmd_005
+  description: "整体院業界の現状と課題を調査（市場規模・後継者問題・DX化遅れ）"
   goal: |
-    ## ステップ1: チャットクリア
-    まず `/clear` コマンドを実行してチャットをリフレッシュしてください。
+    ## 調査テーマ：整体院・整骨院業界の現状分析
 
-    ## ステップ2: UI/UX基本原則の調査
+    ### 調査項目：
+    - 市場規模の推移（縮小傾向のデータ）
+    - 後継者不足の実態
+    - 業界のDX化遅れ
+    - 2026年の業界予測（二極化・専門店化）
 
-    ### 調査テーマ：
-    「美しく使いやすいウェブデザインの基本原則」
+    ### 参考リソース：
+    - 業界レポート、M&A事例、市場調査
 
-    ### 調査項目:
-    1. **視覚的階層（Visual Hierarchy）**
-       - サイズ、色、配置による重要性の表現
-       - ユーザーの視線誘導（F型、Z型パターン）
-
-    2. **ホワイトスペース（余白）の活用**
-       - マイクロスペースとマクロスペース
-       - 適切な余白の取り方
-
-    3. **コントラストと近接性の法則**
-       - 関連する要素のグループ化
-       - コントラストによるコールトゥアクションの強調
-
-    4. **一貫性（Consistency）**
-       - デザインパターンの一貫性
-       - 視覚的一貫性の重要性
-
-    5. **フィードバックと応答性**
-       - ユーザーアクションに対する即座のフィードバック
-       - ローディング状態の表示
-
-    ### 参考リソース:
-    - Nielsen Norman Group（NN/g）の記事
-    - Material Design Guidelines
-    - Apple Human Interface Guidelines
+    ### 期待する成果：
+    データに基づく客観的な業界分析
 
     ### 提出物:
     - レポートを `docs/reports/` ディレクトリにMarkdown形式で作成
-    - ファイル名: `player1_ui-ux-principles.md`
-    - 具体的な例（良いデザインの事例）を含めること
-    - 実装に適用できる具体的なガイドラインを含めること
+    - ファイル名: `player1_industry_analysis.md`
 
     ### 期限:
     - 24時間以内
 
   status: completed
-  completed_at: "2025-02-01T02:00:00+09:00"
-  timestamp: "2025-02-01T01:00:00+09:00"
-  output_file: "docs/reports/player1_ui-ux-principles.md"
+  timestamp: "2026-02-03T14:53:00+09:00"
+  completed_at: "2026-02-03T15:30:00+09:00"
+  output_file: "docs/reports/player1_industry_analysis.md"

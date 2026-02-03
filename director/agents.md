@@ -164,7 +164,7 @@ command:
 
 **最初の呼び出し - メッセージを送る：**
 ```bash
-tmux send-keys -t captain:0.0 'queue/director_to_captain.yamlに新しい指示があります。実行してください。'
+tmux send-keys -t captain:0.0 'queue/director_to_captain.yamlに新しい指示があります。/Users/ryukouokumura/Desktop/shogun-arrangement/captain/agents.mdを確認の上、実行してください。'
 ```
 
 **2番目の呼び出し - Enterを送る：**
@@ -173,6 +173,8 @@ tmux send-keys -t captain:0.0 Enter
 ```
 
 **注**：常に2つの別々のBashツール呼び出しを使用してください。`&&`でチェーンしないでください。
+
+**重要**：キャプテンに通知する際は、必ず**「キャプテン自身のagents.mdを確認させる」**メッセージを含めてください。これにより、キャプテンが自身の役割やプロセスを再確認してからタスクを実行できます。
 
 ### 4. タスク完了を監視する（必須）
 

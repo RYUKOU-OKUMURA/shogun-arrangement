@@ -2,74 +2,34 @@
 # Captain writes tasks here, Player 4 reads
 
 task:
-  id: TASK-2025-0201-104
-  parent_id: null
-  description: /clear コマンド実行 & アクセシビリティの調査
+  id: subtask_005_4
+  parent_id: cmd_005
+  description: "GoogleビジネスプロフィールとLLMO対策による集客効果を調査"
   goal: |
-    ## ステップ1: チャットクリア
-    まず `/clear` コマンドを実行してチャットをリフレッシュしてください。
+    ## 調査テーマ：GoogleビジネスプロフィールとAI検索対策
 
-    ## ステップ2: ウェブアクセシビリティの調査
+    ### 調査項目：
+    - MEO対策の基本と効果
+    - LLMO（AI検索）時代の集客戦略
+    - 口コミ獲得の重要性とAI活用
+    - Googleマップでの集客成功事例
 
-    ### 調査テーマ：
-    「すべての人が使えるウェブデザイン」
+    ### 整体院向けの具体的対策：
+    - プロフィール最適化
+    - 口コミ促進
+    - AIに選ばれるための情報発信
 
-    ### 調査項目:
-
-    #### WCAGガイドライン
-    1. **WCAG 2.1の4原則**
-       - Perceivable（知覚可能）
-       - Operable（操作可能）
-       - Understandable（理解可能）
-       - Robust（堅牢性）
-
-    2. **重要な成功基準（AAレベル）**
-       - 色のコントラスト比（4.5:1以上）
-       - キーボード操作の可能性
-       - フォーカスの視認性
-       - フォームのラベル付け
-
-    3. **ARIAの活用**
-       - ランドマーク（role="banner", "main", "navigation"等）
-       - スクリーンリーダー向けの説明
-       - ライブリージョン（動的コンテンツの通知）
-       - 適切なARIA属性の使い分け
-
-    #### 実践的なアクセシビリティ
-    1. **キーボードナビゲーション**
-       - Tabキーの順序
-       - スキップリンク
-       - フォーカストラップ（モーダル等）
-
-    2. **スクリーンリーダー対応**
-       - セマンティックHTMLの重要性
-       - altテキストの書き方
-       - 見出し構造（h1-h6の正しい使用）
-
-    3. **フォームのアクセシビリティ**
-       - ラベルと入力欄の関連付け
-       - エラーメッセージの通知方法
-       - 必須項目の明示
-
-    4. **アクセシビリティテスト**
-       - 自動テストツール（axe-core, Lighthouse）
-       - スクリーンリーダーでのテスト
-       - キーボードのみでの操作テスト
-
-    ### 参考リソース:
-    - WCAG 2.1 Guidelines（W3C）
-    - WebAIM（Web Accessibility In Mind）
-    - ARIA Authoring Practices Guide
-    - The A11Y Project
+    ### 参考リソース：
+    - MEO対策ガイド、集客事例
 
     ### 提出物:
     - レポートを `docs/reports/` ディレクトリにMarkdown形式で作成
-    - ファイル名: `player4_accessibility.md`
-    - アクセシブルなHTMLコード例を含めること
-    - よくある間違いと対策を含めること
+    - ファイル名: `player4_customer_acquisition.md`
 
     ### 期限:
     - 24時間以内
 
   status: completed
-  timestamp: "2025-02-01T01:00:00+09:00"
+  timestamp: "2026-02-03T14:53:00+09:00"
+  completed_at: "2026-02-03T15:30:00+09:00"
+  output_file: "docs/reports/player4_customer_acquisition.md"
