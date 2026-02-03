@@ -31,5 +31,5 @@ task:
 
   status: completed
   timestamp: "2026-02-03T14:53:00+09:00"
-  completed_at: "2026-02-03T15:30:00+09:00"
-  output_file: "docs/reports/player2_ai_trends_analysis.md"
+  completed_at: "2026-02-03T18:46:00+09:00"
+  report_location: "docs/reports/player2_ai_trends_analysis.md"

@@ -608,3 +608,62 @@ Quality gates ensure:
 - **Confidence**: High coverage means fewer surprises
 
 **No exceptions. All gates must pass.**
+
+---
+
+## 9フェーズAI駆動開発フローとの統合
+
+品質ゲートは9フェーズ開発フローの各フェーズで適用されます：
+
+### Phase 1-3（計画・設計フェーズ）
+- 品質基準の定義
+- テスト戦略の策定
+- 技術的制約の確認
+
+### Phase 4-5（設計レビュー・タスク分解フェーズ）
+- 品質ゲートの設定
+- 各タスクに品質基準を割り当て
+- クリティカルパスの特定
+
+### Phase 6-7（詳細設計フェーズ）
+- 静的解析ツールの選定
+- テストピラミッド戦略の策定
+- 品質ゲートの自動化方法の決定
+
+### Phase 8-9（実装・コードレビューフェーズ）
+- 品質ゲートの実行と検証
+- レビューでの品質確認
+- メトリクスの収集と報告
+
+---
+
+## CODEOWNERSとの統合
+
+品質ゲートとCODEOWNERSを連携させて、レビュー担当者を自動的にアサインします：
+
+```
+# CODEOWNERSファイルの例
+/src/** @director @captain @player1 @player2 @player3 @player4 @player5
+/quality-gates/** @director
+/metrics/** @director
+```
+
+詳細は `/CODEOWNERS` ファイルを参照してください。
+
+---
+
+## 参考ADR
+
+品質ゲートに関連するADR：
+
+- `/docs/adr/ADR-002.md` - 9フェーズAI駆動開発フローの採用
+- `/docs/adr/ADR-003.md` - 品質ゲートとテストピラミッド戦略の採用
+
+---
+
+## 参考リソース
+
+- [Practical Test Pyramid - Martin Fowler](https://martinfowler.com/articles/practical-test-pyramid.html)
+- [Pull Request Best Practices](https://graphite.com/blog/pull-request-best-practices)
+- [9フェーズ開発フロー](/docs/PHASE_08_IMPLEMENTATION.md) - 実装フェーズの詳細
+- [9フェーズ開発フロー](/docs/PHASE_09_CODE_REVIEW.md) - コードレビューフェーズの詳細

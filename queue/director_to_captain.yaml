@@ -235,3 +235,210 @@ command:
         - comprehensive: true
         - sources_cited: true
         - actionable_roadmap: true
+
+command:
+  id: cmd_008
+  timestamp: "2026-02-03T19:20:00"
+  description: "9フェーズAI駆動開発フローのシステム統合を実装"
+  type: feature
+  status: pending
+
+  # AI駆動開発メタデータ
+  small_pr: true
+  tdd_required: true
+
+  subtasks:
+    # タスク1: 品質ゲート自動化スクリプトの実装
+    - id: subtask_008_001
+      description: "品質ゲート自動化スクリプトを実装"
+      assigned_to: player1
+      goal: "全品質ゲートがnpm経由で実行可能になる"
+      type: feature
+
+      context: |
+        - 言語：TypeScript
+        - フレームワーク：Node.js
+        - 目的：品質ゲートの自動化
+        - 実装するスクリプト：
+          - scripts/quality-gates/validate-quality-gates.ts
+          - scripts/quality-gates/check-pr-size.ts
+          - scripts/quality-gates/check-coverage.ts
+          - scripts/quality-gates/check-security.ts
+        - 既存のスクリプトを参考：package.jsonのscriptsセクション
+        - 期待される動作：
+          - npm run quality-gatesで全ての品質ゲートを実行
+          - 各品質ゲートは個別にも実行可能
+          - エラー時は適切な終了コードを返す
+        - エッジケース：
+          - カバレッジが80%未満の場合
+          - ESLintエラーがある場合
+          - TypeScriptエラーがある場合
+          - PRサイズが200行を超える場合
+        - 関連ファイル：
+          - package.json（scriptsセクション）
+          - jest.config.js
+          - tsconfig.json
+          - .eslintrc.json
+
+      output_location: "scripts/quality-gates/"
+      output_format: "typescript"
+
+      quality_gates:
+        - lint: required
+        - typecheck: required
+        - test_coverage: 80%
+        - max_lines: 200
+
+    # タスク2: メトリクス追跡システムの実装
+    - id: subtask_008_002
+      description: "メトリクス追跡システムを実装"
+      assigned_to: player2
+      goal: "dashboard.mdが自動更新される"
+      type: feature
+      depends_on: subtask_008_001
+
+      context: |
+        - 言語：TypeScript
+        - 目的：メトリクスの自動収集とdashboard.mdの更新
+        - 実装する機能：
+          - src/metrics/collector.ts（メトリクス収集）
+          - src/metrics/report-generator.ts（レポート生成）
+          - src/metrics/cli-dashboard.ts（CLIダッシュボード）
+          - src/metrics/anomaly-detector.ts（異常検出）
+        - 追跡するメトリクス：
+          - レビュー待ち時間
+          - PRライフサイクル
+          - テストカバレッジ
+          - 不安定なテスト率
+          - PRあたりの行数
+        - 期待される動作：
+          - npm run metrics:dashboardで現在のメトリクスを表示
+          - npm run metrics:report:weeklyで週次レポートを生成
+          - npm run metrics:check-anomaliesで異常を検出
+        - 関連ファイル：
+          - dashboard.md（更新対象）
+
+      output_location: "src/metrics/"
+      output_format: "typescript"
+
+      quality_gates:
+        - lint: required
+        - typecheck: required
+        - test: must_pass
+
+    # タスク3: CI/CDパイプライン設定の実装
+    - id: subtask_008_003
+      description: "CI/CDパイプライン設定を実装"
+      assigned_to: player3
+      goal: "GitHub Actionsで品質ゲートが自動実行される"
+      type: feature
+
+      context: |
+        - 目的：CI/CDパイプラインの設定
+        - 実装するファイル：
+          - .github/workflows/quality-gates.yml（PR時の品質チェック）
+          - .github/workflows/ci.yml（CIパイプライン）
+          - .husky/pre-commit（プリコミットフック）
+          - .husky/pre-push（プッシュフック）
+        - 期待される動作：
+          - PR作成時に自動で品質ゲートを実行
+          - Fail時はマージをブロック
+          - プリコミットで自動フォーマット
+        - 品質ゲート：
+          - lint
+          - typecheck
+          - test
+          - test:coverage
+          - check:pr-size
+        - 関連ファイル：
+          - package.json
+          - .eslintrc.json
+          - .prettierrc.json
+          - lint-staged設定
+
+      output_location: ".github/workflows/"
+      output_format: "yaml"
+
+      quality_gates:
+        - lint: required
+        - typecheck: required
+        - comprehensive: true
+
+    # タスク4: 9フェーズ開発フローの統合テスト
+    - id: subtask_008_004
+      description: "9フェーズ開発フローの統合テストを実装"
+      assigned_to: player4
+      goal: "9フェーズ開発フローが正常に動作することを確認"
+      type: test
+      depends_on: [subtask_008_001, subtask_008_002, subtask_008_003]
+
+      context: |
+        - 言語：TypeScript
+        - テストフレームワーク：Jest
+        - 目的：9フェーズ開発フローの統合テスト
+        - テスト内容：
+          - Phase 1-5（ディレクター）のワークフロー
+          - Phase 6-7（キャプテン）のワークフロー
+          - Phase 8-9（プレイヤー）のワークフロー
+          - YAML通信プロトコル
+          - send-keys通知プロトコル
+        - 期待される動作：
+          - 全てのフェーズが正しく連携する
+          - YAMLファイルが正しく更新される
+          - 通知が正しく送信される
+        - テストカバレッジ：80%以上
+        - AAAパターンを使用
+
+      output_location: "src/__tests__/integration/phase-workflow.test.ts"
+      output_format: "typescript"
+
+      quality_gates:
+        - lint: required
+        - typecheck: required
+        - test_coverage: 80%
+
+    # タスク5: ドキュメント更新
+    - id: subtask_008_005
+      description: "READMEとセットアップガイドを更新"
+      assigned_to: player5
+      goal: "9フェーズ開発フローの使用方法が明確になる"
+      type: docs
+      depends_on: [subtask_008_001, subtask_008_002, subtask_008_003]
+
+      context: |
+        - 目的：ドキュメントの更新
+        - 更新するファイル：
+          - README.md（9フェーズ開発フローの説明を追加）
+          - SETUP.md（9フェーズ開発フローの使用方法を追加）
+          - docs/QUICK_START.md（クイックスタートガイドを新規作成）
+        - 記載する内容：
+          - 9フェーズ開発フローの概要
+          - 各フェーズの目的とチェックリスト
+          - ADRの参照方法
+          - 品質ゲートの実行方法
+          - CI/CDパイプラインの使用方法
+        - 期待される動作：
+          - 新メンバーでも9フェーズ開発フローを理解できる
+          - 既存メンバーも参照できる
+
+      output_location: "docs/"
+      output_format: "markdown"
+      output_filename: "QUICK_START.md"
+
+      quality_gates:
+        - comprehensive: true
+        - sources_cited: true
+
+  # 品質基準（全体）
+  quality_standards:
+    test_coverage: 80%
+    lint: required
+    typecheck: required
+    max_pr_lines: 200
+    tdd_required: true
+
+  # 依存関係の要約
+  dependencies:
+    - player1の品質ゲートスクリプトが完了したら、player2とplayer3が並列で開始可能
+    - player2とplayer3が完了したら、player4が統合テストを開始
+    - player4が完了したら、player5がドキュメントを更新
